@@ -1,6 +1,12 @@
-Quiz-app/__pycache__/
-Quiz-app/*.pyc
-Quiz-app/myenv/
-Quiz-app/.env
+# Ignore Python caches
+quiz-app/__pycache__/
+quiz-app/*.pyc
+quiz-app/myenv/
+quiz-app/.env
+
+# Ignore Node.js dependencies
 Quiz_node/node_modules/
 Quiz_frontend/node_modules/
+
+# Ignore VS Code settings (optional)
+.vscode/

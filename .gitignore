@@ -1,0 +1,6 @@
+Quiz-app/__pycache__/
+Quiz-app/*.pyc
+Quiz-app/myenv/
+Quiz-app/.env
+Quiz_node/node_modules/
+Quiz_frontend/node_modules/

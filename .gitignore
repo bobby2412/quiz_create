@@ -1,7 +1,6 @@
 # Ignore Python caches
 quiz-app/__pycache__/
-quiz-app/*.pyc
-quiz-app/myenv/
+quiz-app/venv/
 quiz-app/.env
 
 # Ignore Node.js dependencies

@@ -155,10 +155,16 @@ const FileUpload = () => {
     setResultAnalytics({ questionAnalytics, timeSpent, averageTimePerQuestion: timeSpent / quizQuestions.length });
 
     try {
+      const response1 = await fetch("http://localhost:5001/checkAuth", {
+        credentials: "include", // Ensures cookies/session data are sent
+      });
+      const data = await response1.json(); // <- Await here
+      console
+
       const response = await fetch('http://127.0.0.1:5000/submit-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ quizId, selectedAnswers, score: totalScore, totalQuestions: quizQuestions.length, timeSpent }),
+        body: JSON.stringify({ quizId, selectedAnswers, score: totalScore, totalQuestions: quizQuestions.length, timeSpent,user: data.user.email}),
       });
       if (!response.ok) throw new Error('Failed to submit results');
       await fetchQuizStats();

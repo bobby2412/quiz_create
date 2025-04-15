@@ -27,6 +27,7 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .app {
@@ -87,6 +88,14 @@ body {
   backdrop-filter: blur(5px);
 }
 
+.btn-secondary2 {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  padding: 12px 12px;
+  border-radius: 50%;
+}
 .btn-secondary:hover {
   background-color: rgba(255, 255, 255, 0.15);
   border-color: var(--secondary-color);
@@ -128,6 +137,42 @@ body {
   background-color: rgba(157, 78, 221, 0.15);
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(157, 78, 221, 0.2);
+}
+
+
+
+.profile-box {
+  position: fixed; /* Fix the profile box in place */
+  top: 20px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+  width: 250px; /* Set a width for the profile box */
+  background-color: #fff; /* Background color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+  padding: 15px; /* Padding inside the box */
+  z-index: 1000; /* Ensure it appears above other content */
+  color: #10002b;
+  border-radius: 10%;
+}
+.btn-logout {
+  margin-top: 10px; /* Space above the button */
+  background-color: #ff4d4d; /* Red color for logout */
+  color: white; /* White text */
+  border: none; /* No border */
+  padding: 10px; /* Padding */
+  cursor: pointer; /* Pointer cursor on hover */
+  width: 100%; /* Full width */
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  float: right; /* Align the close button to the right */
+}
+
+.profile-box h2 {
+  margin-top: 0; /* Remove default margin */
 }
 
 /* Navbar styles */

@@ -27,7 +27,7 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}}, supports_cred
 # MongoDB Configuration (using local or Atlas URI from .env)
 MONGODB_URI = os.getenv("MONGODB_URI")
 client = MongoClient(MONGODB_URI)
-db = client.quiz_app  # Simplified database name
+db = client.test  # Simplified database name
 users_collection = db["users"]  
 quizzes_collection = db.quizzes
 results_collection = db.results
@@ -229,7 +229,7 @@ def upload_file():
     except Exception as e:
         return jsonify({'error': f'Internal server error: {str(e)}'}), 500
 
-# Submit result endpoint
+
 @app.route('/submit-result', methods=['POST'])
 def submit_result():
     try:
@@ -239,10 +239,11 @@ def submit_result():
         score = data.get('score')
         total_questions = data.get('totalQuestions')
         time_spent = data.get('timeSpent')
+        email = data.get('user')
 
         if not all([quiz_id, selected_answers, isinstance(score, (int, float)), isinstance(total_questions, int), isinstance(time_spent, (int, float))]):
             return jsonify({'error': 'Missing or invalid required fields'}), 400
-
+        # print(data)
         quiz = quizzes_collection.find_one({'_id': ObjectId(quiz_id)})
         if not quiz:
             return jsonify({'error': 'Quiz not found'}), 404
@@ -250,6 +251,7 @@ def submit_result():
         score_percentage = (score / total_questions) * 100
         result_data = {
             'quizId': ObjectId(quiz_id),
+            'email': email,
             'selectedAnswers': selected_answers,
             'score': score,
             'scorePercentage': score_percentage,
@@ -258,7 +260,7 @@ def submit_result():
             'submittedAt': datetime.now(timezone.utc)
         }
         result_id = results_collection.insert_one(result_data).inserted_id
-
+        print(result_data)
         quizzes_collection.update_one(
             {'_id': ObjectId(quiz_id)},
             {'$inc': {'times_taken': 1}}
@@ -269,7 +271,7 @@ def submit_result():
     except ValueError as ve:
         return jsonify({'error': str(ve)}), 400
     except Exception as e:
-        return jsonify({'error': f'Internal server error: {str(e)}'}), 500
+        return jsonify({'error5': f'Internal server error1: {str(e)}'}), 500
 
 # Quiz stats endpoint
 @app.route('/quiz-stats/<quiz_id>', methods=['GET'])

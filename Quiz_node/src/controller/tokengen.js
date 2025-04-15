@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../lib/db.js";
+import { User } from "../lib/db.js";
 
 export const protectRoute = async (req, res, next) => {
     try {
@@ -32,7 +32,7 @@ export const generateToken=(userId,res) =>{
         expiresIn:"7d"
     })
     res.cookie("jwt",token,{
-        maxAge: 7*24*60*60*1000,
+        maxAge: 60*60*1000,
         httpOnly: true,
         sameSite:"lax", 
         secure: false

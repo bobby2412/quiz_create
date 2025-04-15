@@ -1,4 +1,4 @@
-import User from "../lib/db.js";
+import { User } from "../lib/db.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "./tokengen.js";
 
@@ -42,6 +42,7 @@ export const checkAuth = (req, res) => {
         return res.status(500).json({ message: "Internal Server Error at check auth" });
     }
 };
+
 export const login = async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -83,4 +84,13 @@ export const logout = (req, res) => {
     }
 };
 
+export const callDB=(req,res)=>{
+    try{
+        return res.status(200).json({message:"Call to DB Succesful",user:req.user});
+    }
+    catch(error){
+        console.error("CallDB Error:",error.message);
+        return res.status(500).json({message:"Internal Server Error at call db"});
+    }
+}
 export default { signup, login, logout, checkAuth };

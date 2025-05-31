@@ -60,7 +60,7 @@ def extract_text_from_pdf(pdf_file):
 def generate_quiz_from_text(text):
     max_chars = 5000
     truncated_text = text[:max_chars]
-    question_count = 3  # Dynamic question count
+    question_count = 5  # Dynamic question count
 
     prompt = f"""
     Based on the following text, generate {question_count} multiple-choice questions.

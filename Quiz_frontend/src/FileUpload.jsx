@@ -24,7 +24,7 @@ const FileUpload = () => {
   const [timerActive, setTimerActive] = useState(false);
   const [theme, setTheme] = useState('cyber');
   const [achievements, setAchievements] = useState([]);
-  const [hints, setHints] = useState({});
+
   const [maxStreak, setMaxStreak] = useState(0);
 
   const fileInputRef = useRef(null);
@@ -105,17 +105,13 @@ const FileUpload = () => {
     setTimeSpent(0);
     setReviewMode(false);
     setAchievements([]);
-    setHints({});
     setMaxStreak(0);
   };
 
   const handleAnswerChange = (questionIndex, answer) => {
     const isCorrect = answer === quizQuestions[questionIndex].correctAnswer;
     setSelectedAnswers((prev) => ({ ...prev, [questionIndex]: answer }));
-    setHints((prev) => (isCorrect ? { ...prev, [questionIndex]: undefined } : {
-      ...prev,
-      [questionIndex]: quizQuestions[questionIndex].explanation || 'Review the key concepts.',
-    }));
+    
   };
 
   const nextQuestion = () => {
@@ -348,16 +344,7 @@ const FileUpload = () => {
                         onChange={() => handleAnswerChange(currentQuestion, choice)}
                       />
                       {choice}
-                      {hints[currentQuestion] && selectedAnswers[currentQuestion] === choice && (
-                        <motion.span
-                          className="hint"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          💡 {hints[currentQuestion]}
-                        </motion.span>
-                      )}
+                      
                     </motion.label>
                   ))}
                 </div>
